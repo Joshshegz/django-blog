@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Delete Post</title>
+    <style>
+        .delete-container {
+            max-width: 600px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        .warning {
+            color: #721c24;
+            background-color: #f8d7da;
+            padding: 15px;
+            margin-bottom: 20px;
+            border: 1px solid #f5c6cb;
+            border-radius: 4px;
+        }
+        .buttons {
+            display: flex;
+            gap: 10px;
+            margin-top: 20px;
+        }
+        .delete-btn {
+            background-color: #dc3545;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .cancel-btn {
+            background-color: #6c757d;
+            color: white;
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body>
+    <div class="delete-container">
+        <h1>Delete Post</h1>
+        <div class="warning">
+            Are you sure you want to delete "{{ post.title }}"?
+            This action cannot be undone.
+        </div>
+        <form method="post">
+            {% csrf_token %}
+            <div class="buttons">
+                <button type="submit" class="delete-btn">Delete</button>
+                <a href="{% url 'post_detail' post.id %}" class="cancel-btn">Cancel</a>
+            </div>
+        </form>
+    </div>
+</body>
+</html>
