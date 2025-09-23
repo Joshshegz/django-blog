@@ -19,7 +19,7 @@ class Blog(models.Model):
     title = models.CharField(max_length=200)
     body = models.TextField(max_length=5000)
     author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='blogs')
-    slug = models.SlugField(max_length=200, unique=True, blank=True)
+    slug = models.SlugField(max_length=200, unique=True, blank=True, unique_for_date='publish')
     choices = models.CharField(max_length=2, choices=Status.choices, default=Status.DRAFT)
     tags = models.ManyToManyField('Tags', blank=True)
     publish =models.DateTimeField(default=timezone.now) 
@@ -30,16 +30,16 @@ class Blog(models.Model):
     objects = models.Manager()
     published = PublishedManager()
     
-class Meta:
-    ordering = ['-publish']
-    indexes = [ models.Index(fields=['-publish']), ]
+    class Meta:
+        ordering = ['-publish']
+        indexes = [ models.Index(fields=['-publish']), ]
     
     def __str__(self): 
         return self.title
 
 
-def get_absolute_url(self):
-    return reverse( 'blog:post_detail', args=[self.id] )
+    def get_absolute_url(self):
+        return reverse( 'blog:post_detail', args=[self.id] )
 
 # class Profile(models.Model):
 #     user = models.OneToOneField(User, on_delete=models.CASCADE)
