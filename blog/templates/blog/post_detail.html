@@ -41,7 +41,8 @@
     </style>
 </head>
 <body>
-    <a href="{% url 'all_posts' %}" class="back-link">← Back to all posts</a>
+    <!-- FIXED LINE -->
+    <a href="{% url 'blog:all_posts' %}" class="back-link">← Back to all posts</a>
     
     <article class="post">
         <h1 class="post-title">{{ post.title }}</h1>
